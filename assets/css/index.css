@@ -3109,7 +3109,7 @@ body.modal-open {
 }
 
 .fcard-front {
-  background-image: url('cg-lusion-cards/assets/card-front.png');
+  background-image: url('../images/card-front.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
