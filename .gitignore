@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Gemini/Antigravity artifacts
+.gemini/
+.claude/
+.antigravity/
+brain/
+logs/
+tmp/
+*.log
