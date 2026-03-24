@@ -23,6 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSection = document.getElementById('hero');
     if (heroSection) heroSection.style.minHeight = '100vh';
 
+    // Conditionally load Spline script only on Desktop to save performance on mobile
+    if (window.innerWidth > 768) {
+        const splineScript = document.createElement('script');
+        splineScript.type = 'module';
+        splineScript.src = 'https://unpkg.com/@splinetool/viewer@1.9.5/build/spline-viewer.js';
+        document.head.appendChild(splineScript);
+    }
+
     initPillNav();
     initHeroSpotlight();
     initSplashCursor('hero-splash-canvas', 'hero');
@@ -465,12 +473,11 @@ function initExperimentModal() {
     function startModalGlow() { if (!touchDevice) modalElectricEffect._startIdle(); }
     function stopModalGlow() { modalElectricEffect._stopIdle(); }
 
-    // ------- Tab switching (with electric surge) -------
+    // ------- Tab switching (with electric surge on desktop only) -------
     function switchTab(tabName) {
         if (!currentExperiment || tabName === currentTab) return;
 
-        // Surge first, then commit the content swap inside the callback
-        modalElectricEffect.surge(() => {
+        const performTabSwap = () => {
             currentTab = tabName;
 
             tabsWrap.querySelectorAll('.exp-modal__tab').forEach(t => {
@@ -482,9 +489,17 @@ function initExperimentModal() {
             contentEl.innerHTML = renderTab(currentExperiment, tabName);
             contentEl.scrollTop = 0;
 
-            // Resume idle glow after surge (desktop)
+            // Resume idle glow after surge is complete (desktop)
             if (!touchDevice) modalElectricEffect._startIdle();
-        });
+        };
+
+        // Bypass the electric surge effect completely on mobile phones
+        if (window.innerWidth < 768) {
+            performTabSwap();
+        } else {
+            // Surge first, then commit the content swap inside the callback on larger screens
+            modalElectricEffect.surge(performTabSwap);
+        }
     }
 
     // ------- Event Listeners -------
@@ -746,8 +761,71 @@ function initFacultySwiper() {
 
     // Grid parameters
     const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+        wrapper.classList.add('faculty-mobile-grid');
+        // Repurpose the existing hint to instruct the user to tap
+        const hint = section.querySelector('.faculty-scroll-hint');
+        if (hint) {
+            const hintText = hint.querySelector('.faculty-scroll-hint__text');
+            if (hintText) hintText.textContent = "Tap deck to unfold";
+            hint.style.display = 'flex'; // show the hint
+        }
+
+        // --- Mobile Unfold Interaction (Stacked Deck -> Swipe Carousel) ---
+        let distributed = false;
+
+        wrapper.addEventListener('click', () => {
+            if (distributed) return; // Only unfold once
+            distributed = true;
+
+            // Fade out the hint smoothly and FORCE it to stop pulsing
+            if (hint) {
+                hint.style.animation = 'none'; // Kill CSS Pulse so GSAP can apply opacity
+                gsap.to(hint, {
+                    opacity: 0,
+                    duration: 0.3,
+                    onComplete: () => hint.style.display = 'none'
+                });
+            }
+
+            // Immediately apply CSS distributed state
+            wrapper.classList.add('is-distributed');
+
+            // Hard-reset the invisible scrollbar to index 0 instantly
+            wrapper.scrollTo({ left: 0, behavior: 'instant' });
+
+            // Set up horizontal layout natively! CSS handles the smooth transition of `left` automatically!
+            let totalWidth = 20;
+            const cardWidth = 280;
+            const gap = 16;
+
+            cards.forEach((card, index) => {
+                const targetLeft = 20 + (index * (cardWidth + gap));
+
+                // Allow CSS transition to lock onto the new explicitly set coordinates
+                setTimeout(() => {
+                    card.style.left = `${targetLeft}px`;
+                    card.style.marginLeft = '0px';
+                }, 10 + (index * 30)); // slight manual stagger effect!
+
+                totalWidth = targetLeft + cardWidth + 20;
+            });
+
+            // Append an invisible spacer div to force the native scrolling scrollbar width
+            // Using display: block and exact width firmly enforces scroll boundaries across all browsers!
+            setTimeout(() => {
+                const spacer = document.createElement('div');
+                spacer.style.display = 'block';
+                spacer.style.height = '1px';
+                spacer.style.width = `${totalWidth}px`;
+                wrapper.appendChild(spacer);
+            }, 50);
+        });
+
+        return; // Skip desktop complex GSAP on mobile
+    }
     const isTablet = window.innerWidth < 1200 && !isMobile;
-    const cols = isMobile ? 1 : (isTablet ? 2 : 4);
+    const cols = isTablet ? 2 : 4;
     const gapX = isMobile ? 0 : (isTablet ? 340 : 340); // Increased from 310 to 340 for horizontal breathability
     const gapY = Math.max(window.innerHeight * 0.9, 500); // Massive vertical gap so you never see the next row
 

@@ -1,91 +1,37 @@
-# ⚛️ UG Physics Laboratory 
+# UG Physics Laboratory Explorer
 
-> **A professional, interactive web portal designed for undergraduate students at LNMIIT to explore the fundamentals of Physics through experimentation and modern digital resources.**
+Welcome to the **UG Physics Laboratory** project web portal! This interactive web platform provides students and faculty with an immersive, digitally simulated environment to explore laboratory resources, study experiments, and connect seamlessly on any computer or mobile device.
 
----
+## 🌟 Key Features
 
-## 🌟 Overview
+* **Fully Responsive Design**: Hand-crafted layouts meticulously optimized for giant desktop monitors down to tiny mobile phone screens. We emphasize clean typography and frictionless reading without squinting or pinching.
+* **Interactive Faculty Deck**: An ultra-smooth, native gesture-powered horizontal unfolding swipe carousel for exploring faculty members effortlessly on the go.
+* **Responsive Lab Manual Viewer**: A sleek, full-screen PDF experiment protocol viewer stripped of clunky native UI, fortified with an ambient dismissible toast notification for flawless navigation and an expanded canvas.
+* **High-Performance Animations**: Lightning-fast hardware-accelerated transitions that natively track mobile layouts to provide 60 FPS buttery-smooth experiences without compromising battery life.
+* **Intelligent Modals**: Fully robust modals preventing background layout shifts or unexpected overflow clips.
 
-The **UG Physics Laboratory Portal** is a high-performance, aesthetically rich web application that serves as a digital companion to the 1st-year B.Tech Physics course. It bridges the gap between theoretical knowledge and practical application by providing students with interactive 3D visuals, demonstrative videos, and digitized lab manuals.
+## 📱 Mobile-First Optimizations
 
-### 🚀 [Live Demo (Vercel)](https://ug-physics-lab-v3.vercel.app) *(Replace with your actual Vercel URL once deployed)*
+We recently introduced significant quality-of-life adjustments to specifically accommodate modern smartphones:
+- Redesigned the *Meet the Faculty* 3D deck into a space-efficient tap-to-expand card carousel.
+- Safely placed crucial navigation hints completely inside device bounds so they don't clip against standard phone boundaries.
+- Optimized the Physics "electrical surge" canvas animations, intelligently bypassing heavy rendering sequences exclusively on low-resource mobile screens to maintain lightning-fast responsiveness.
+- Redesigned the document viewer components to ensure that nested scroll bars and tools stay natively tucked away until needed.
 
----
+## 🚀 Technical Architecture
 
-## ✨ Key Features
+Built purely relying on zero-dependency native web fundamentals alongside precision animation engines:
+- **HTML5:** Semantic, accessible components defining flawless layouts.
+- **CSS3:** Custom layout tokens pushing edge-of-the-browser properties for native touch scrolling, fluid breakpoints, and blur filters.
+- **JavaScript (Vanilla + GSAP):** Direct DOM manipulations and robust interaction hooks prioritizing the native Browser Engine. GreenSock handles timeline sequences where layout interpolation goes beyond static transitions.
 
-### 🌌 Immersive 3D Experience (Spline)
-- **Interactive Robot Hero:** A high-fidelity 3D model that reacts to user presence.
-- **Physics GPT AI Integration:** Direct access to an AI assistant explicitly for Physics queries.
+## 🛠 Usage
 
-### 🧪 Digital Experiments Directory
-- **Dynamic Grid Navigation:** Explore the curriculum through an optimized, staggered-reveal grid.
-- **Seamless Modal Transitions:** Uses **GSAP Flip** technology to expand experiment cards into full-screen interactive panels without jarring jumps.
-- **Electric Border Effects:** Custom high-performance canvas lightning around active experiment panels.
-
-### 📹 Curated Video Showcase
-- **Cinema Mode:** Demo and walkthrough videos for every experiment, directly integrated with YouTube for visual learning.
-- **Magnetic 3D Cards:** Advanced hover effects using trigonometric math for depth and lighting simulation.
-
-### 📑 Integrated Lab Resources
-- **Embedded PDF Viewer:** High-fidelity lab manual integration with direct page navigation.
-- **Structured Theory & Procedure:** Every experiment includes centralized data for Theory, Procedure, and Tab-based resources.
-
-### 🖱️ State-of-the-art UI/UX
-- **Lenis Smooth Scroll:** Consistent, buttery-smooth scrolling across all browsers.
-- **Floating Pill Navigation:** Smart, auto-tracking island navigation with sliding highlight indicators.
-- **Splash Fluid Cursor:** WebGL-based fluid simulation that trails the mouse cursor on the hero section.
+1. **Viewing the Lab:** Open the main `index.html` link on any device.
+2. **Accessing Menus:** Tap directly on modal triggers to pull up dynamic experiment overviews for *Theory*, *Procedure*, *Resources*, and *Videos*.
+3. **Exploring Faculty:** From a phone, tap the stacked deck to smoothly fan out the roster horizontally.
+4. **Learning Materials:** Access the dedicated PDF web viewer to load specific protocol pages effortlessly!
 
 ---
 
-## 🛠️ Technology Stack
-
-| Layer | Technologies used |
-| :--- | :--- |
-| **Frontend** | HTML5 Semantic Tags, Vanilla CSS (Modern Fluid Typography) |
-| **Logic** | Pure Vanilla JavaScript (Modular ES6 Pattern) |
-| **Animation** | [GSAP](https://gsap.com/) (ScrollTrigger, Flip, Timeline) |
-| **3D Rendering** | [Spline](https://spline.design/) (WebGL Engine) |
-| **Smooth Motion** | [Lenis](https://lenis.darkroom.engineering/) |
-| **Styling** | Futuristic Glassmorphism, Neon/Electric Aesthetic |
-
----
-
-## 📂 Project Structure
-
-```text
-ug-physics-lab/
-├── assets/
-│   ├── css/
-│   │   └── index.css           # Centralized Design System & Tokens
-│   ├── js/
-│   │   ├── main.js             # Core UI Interactions & Logic
-│   │   ├── labData.js          # Centralized Database for Experiments
-│   │   ├── electricEffect.js   # Canvas Lightning Logic
-│   │   ├── heroParticles.js    # Floating Particle System
-│   │   └── splashCursor.js     # WebGL Fluid Overlay
-│   └── images/
-│       └── card-front.png      # High-end Faculty/Resource Graphics
-├── index.html                  # Main Entry Point
-├── pdf-viewer.html             # Specialized Manual View
-└── .gitignore                  # Keeps your deployment clean
-```
-
----
-
-## 🚢 Deployment
-
-The project is optimized for deployment via **Vercel** or **GitHub Pages**.
-
-1. **Vercel:** Just import this repository. Vercel automatically detects the root `index.html`.
-2. **Local:** Simply open `index.html` in any modern web browser.
-
----
-
-## ✍️ Authors
-
-- **Lakshit Singh** - *Development & Interactive Design*
-
----
-
-> "Laboratory work is a very important part of a course in General Physics. It reinforces the student's understanding of fundamental concepts while developing scientific measurement skills."
+*This project represents our ongoing commitment to elevating the digital science learning experience for every student, regardless of the device they connect from.*

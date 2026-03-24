@@ -19,8 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- Spline 3D Viewer -->
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.5/build/spline-viewer.js"></script>
+    <!-- Spline 3D Viewer loaded dynamically in main.js if not mobile -->
     <!-- GSAP & Lenis (for faculty card animation) loaded in body -->
 </head>
 
@@ -35,7 +34,7 @@
             <a href="#videos" class="pill-nav__link" data-section="videos">Videos</a>
             <a href="#faculty" class="pill-nav__link" data-section="faculty">Faculty</a>
             <a href="#facilities" class="pill-nav__link" data-section="facilities">Facilities</a>
-            <a href="#contact" class="pill-nav__link" data-section="contact">Contact Us</a>
+            <a href="#contact" class="pill-nav__link" data-section="contact">Contact</a>
         </div>
     </nav>
 
@@ -61,7 +60,8 @@
                     </h1>
                     <div class="hero-spline__divider"></div>
                     <p class="hero-spline__desc">
-                        Explore the fundamentals of physics through interactive, hands-on experiments designed for discovery.
+                        Explore the fundamentals of physics through interactive, hands-on experiments designed for
+                        discovery.
                     </p>
                 </div>
 
@@ -186,7 +186,7 @@
                 <p class="section-header__eyebrow">// Our Team</p>
                 <h2 class="section-header__title">Meet the <span class="gradient-text">Faculty</span></h2>
                 <p class="section-header__desc">
-                    Scroll down to reveal our distinguished educators and researchers.
+                    Click on the cards to reveal our distinguished educators and researchers.
                 </p>
             </div>
         </div>
