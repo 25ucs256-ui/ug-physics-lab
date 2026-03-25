@@ -258,6 +258,9 @@ function renderExperimentGrid() {
 
 /* ---------- Experiment Card BorderGlow Effect ---------- */
 function initExpCardBorderGlow() {
+    // Disable on mobile/tablet to save performance and avoid touch-hover artifacts
+    if (window.innerWidth < 1024) return;
+
     const cards = document.querySelectorAll('.exp-card');
     if (!cards.length) return;
 
