@@ -1406,42 +1406,218 @@ spline-viewer::part(logo) {
   }
 }
 
-/* Individual card */
+/* Individual card — BorderGlow effect */
 .exp-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  --edge-proximity: 0;
+  --cursor-angle: 45deg;
+  --edge-sensitivity: 30;
+  --color-sensitivity: calc(var(--edge-sensitivity) + 20);
+  --glow-padding: 36px;
+  --cone-spread: 25;
+  --fill-opacity: 0.5;
+
+  /* Default glow color (blue) */
+  --glow-color: hsl(220deg 80% 70% / 100%);
+  --glow-color-60: hsl(220deg 80% 70% / 60%);
+  --glow-color-50: hsl(220deg 80% 70% / 50%);
+  --glow-color-40: hsl(220deg 80% 70% / 40%);
+  --glow-color-30: hsl(220deg 80% 70% / 30%);
+  --glow-color-20: hsl(220deg 80% 70% / 20%);
+  --glow-color-10: hsl(220deg 80% 70% / 10%);
+
+  /* Default gradient colors (blue) */
+  --gradient-one: radial-gradient(at 80% 55%, hsla(217, 91%, 60%, 1) 0px, transparent 50%);
+  --gradient-two: radial-gradient(at 69% 34%, hsla(199, 89%, 55%, 1) 0px, transparent 50%);
+  --gradient-three: radial-gradient(at 8% 6%, hsla(185, 80%, 60%, 1) 0px, transparent 50%);
+  --gradient-four: radial-gradient(at 41% 38%, hsla(210, 100%, 64%, 1) 0px, transparent 50%);
+  --gradient-five: radial-gradient(at 86% 85%, hsla(199, 89%, 55%, 1) 0px, transparent 50%);
+  --gradient-six: radial-gradient(at 82% 18%, hsla(185, 80%, 60%, 1) 0px, transparent 50%);
+  --gradient-seven: radial-gradient(at 51% 4%, hsla(217, 91%, 60%, 1) 0px, transparent 50%);
+  --gradient-base: linear-gradient(#60a5fa 0 100%);
+
+  position: relative;
   border-radius: var(--radius-lg);
+  isolation: isolate;
+  transform: translate3d(0, 0, 0.01px);
+  display: grid;
+  border: 1px solid rgb(255 255 255 / 10%);
+  background: var(--bg-card);
+  overflow: visible;
   padding: var(--sp-7) var(--sp-6);
   text-align: center;
-  transition:
-    transform 0.35s var(--ease-out),
-    box-shadow 0.35s var(--ease-out),
-    border-color 0.35s var(--ease-out);
   cursor: default;
+  transition: transform 0.35s var(--ease-out);
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 1px 2px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px,
+    rgba(0, 0, 0, 0.1) 0px 4px 8px,
+    rgba(0, 0, 0, 0.1) 0px 8px 16px;
 }
 
 .exp-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(96, 165, 250, 0.3);
-  box-shadow:
-    0 8px 32px rgba(96, 165, 250, 0.12),
-    0 0 60px rgba(96, 165, 250, 0.06);
 }
 
-/* Violet variant hover */
-.exp-card:has(.exp-card__icon--violet):hover {
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow:
-    0 8px 32px rgba(139, 92, 246, 0.12),
-    0 0 60px rgba(139, 92, 246, 0.06);
+/* Violet variant glow colors */
+.exp-card:has(.exp-card__icon--violet) {
+  --glow-color: hsl(263deg 85% 70% / 100%);
+  --glow-color-60: hsl(263deg 85% 70% / 60%);
+  --glow-color-50: hsl(263deg 85% 70% / 50%);
+  --glow-color-40: hsl(263deg 85% 70% / 40%);
+  --glow-color-30: hsl(263deg 85% 70% / 30%);
+  --glow-color-20: hsl(263deg 85% 70% / 20%);
+  --glow-color-10: hsl(263deg 85% 70% / 10%);
+
+  --gradient-one: radial-gradient(at 80% 55%, hsla(263, 100%, 76%, 1) 0px, transparent 50%);
+  --gradient-two: radial-gradient(at 69% 34%, hsla(280, 90%, 68%, 1) 0px, transparent 50%);
+  --gradient-three: radial-gradient(at 8% 6%, hsla(300, 70%, 72%, 1) 0px, transparent 50%);
+  --gradient-four: radial-gradient(at 41% 38%, hsla(250, 100%, 70%, 1) 0px, transparent 50%);
+  --gradient-five: radial-gradient(at 86% 85%, hsla(280, 90%, 68%, 1) 0px, transparent 50%);
+  --gradient-six: radial-gradient(at 82% 18%, hsla(300, 70%, 72%, 1) 0px, transparent 50%);
+  --gradient-seven: radial-gradient(at 51% 4%, hsla(263, 100%, 76%, 1) 0px, transparent 50%);
+  --gradient-base: linear-gradient(#a78bfa 0 100%);
 }
 
-/* Cyan variant hover */
-.exp-card:has(.exp-card__icon--cyan):hover {
-  border-color: rgba(6, 182, 212, 0.3);
+/* Cyan variant glow colors */
+.exp-card:has(.exp-card__icon--cyan) {
+  --glow-color: hsl(187deg 80% 60% / 100%);
+  --glow-color-60: hsl(187deg 80% 60% / 60%);
+  --glow-color-50: hsl(187deg 80% 60% / 50%);
+  --glow-color-40: hsl(187deg 80% 60% / 40%);
+  --glow-color-30: hsl(187deg 80% 60% / 30%);
+  --glow-color-20: hsl(187deg 80% 60% / 20%);
+  --glow-color-10: hsl(187deg 80% 60% / 10%);
+
+  --gradient-one: radial-gradient(at 80% 55%, hsla(187, 100%, 60%, 1) 0px, transparent 50%);
+  --gradient-two: radial-gradient(at 69% 34%, hsla(174, 90%, 55%, 1) 0px, transparent 50%);
+  --gradient-three: radial-gradient(at 8% 6%, hsla(160, 80%, 65%, 1) 0px, transparent 50%);
+  --gradient-four: radial-gradient(at 41% 38%, hsla(192, 100%, 50%, 1) 0px, transparent 50%);
+  --gradient-five: radial-gradient(at 86% 85%, hsla(174, 90%, 55%, 1) 0px, transparent 50%);
+  --gradient-six: radial-gradient(at 82% 18%, hsla(160, 80%, 65%, 1) 0px, transparent 50%);
+  --gradient-seven: radial-gradient(at 51% 4%, hsla(187, 100%, 60%, 1) 0px, transparent 50%);
+  --gradient-base: linear-gradient(#06b6d4 0 100%);
+}
+
+/* BorderGlow pseudo-element layers (::before = colored border, ::after = fill glow) */
+.exp-card::before,
+.exp-card::after,
+.exp-card > .edge-light {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transition: opacity 0.25s ease-out;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Fade out when not hovered */
+.exp-card:not(:hover)::before,
+.exp-card:not(:hover)::after,
+.exp-card:not(:hover) > .edge-light {
+  opacity: 0;
+  transition: opacity 0.75s ease-in-out;
+}
+
+/* Colored mesh-gradient border */
+.exp-card::before {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--bg-card) 0 100%) padding-box,
+    linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box,
+    var(--gradient-one) border-box,
+    var(--gradient-two) border-box,
+    var(--gradient-three) border-box,
+    var(--gradient-four) border-box,
+    var(--gradient-five) border-box,
+    var(--gradient-six) border-box,
+    var(--gradient-seven) border-box,
+    var(--gradient-base) border-box;
+
+  opacity: calc((var(--edge-proximity) - var(--color-sensitivity)) / (100 - var(--color-sensitivity)));
+
+  mask-image:
+    conic-gradient(
+      from var(--cursor-angle) at center,
+      black calc(var(--cone-spread) * 1%),
+      transparent calc((var(--cone-spread) + 15) * 1%),
+      transparent calc((100 - var(--cone-spread) - 15) * 1%),
+      black calc((100 - var(--cone-spread)) * 1%)
+    );
+}
+
+/* Colored mesh-gradient background fill near edges */
+.exp-card::after {
+  border: 1px solid transparent;
+  background:
+    var(--gradient-one) padding-box,
+    var(--gradient-two) padding-box,
+    var(--gradient-three) padding-box,
+    var(--gradient-four) padding-box,
+    var(--gradient-five) padding-box,
+    var(--gradient-six) padding-box,
+    var(--gradient-seven) padding-box,
+    var(--gradient-base) padding-box;
+
+  mask-image:
+    linear-gradient(to bottom, black, black),
+    radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
+    radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
+    conic-gradient(from var(--cursor-angle) at center, transparent 5%, black 15%, black 85%, transparent 95%);
+
+  mask-composite: subtract, add, add, add, add, add;
+  -webkit-mask-composite: source-out, source-over, source-over, source-over, source-over, source-over;
+  opacity: calc(var(--fill-opacity) * (var(--edge-proximity) - var(--color-sensitivity)) / (100 - var(--color-sensitivity)));
+  mix-blend-mode: soft-light;
+}
+
+/* Outer glow layer */
+.exp-card > .edge-light {
+  content: none;
+  inset: calc(var(--glow-padding) * -1);
+  z-index: 1;
+  pointer-events: none;
+
+  mask-image:
+    conic-gradient(
+      from var(--cursor-angle) at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%
+    );
+
+  opacity: calc((var(--edge-proximity) - var(--edge-sensitivity)) / (100 - var(--edge-sensitivity)));
+  mix-blend-mode: plus-lighter;
+}
+
+.exp-card > .edge-light::before {
+  content: "";
+  position: absolute;
+  inset: var(--glow-padding);
+  border-radius: inherit;
   box-shadow:
-    0 8px 32px rgba(6, 182, 212, 0.12),
-    0 0 60px rgba(6, 182, 212, 0.06);
+    inset 0 0 0 1px var(--glow-color),
+    inset 0 0 1px 0 var(--glow-color-60),
+    inset 0 0 3px 0 var(--glow-color-50),
+    inset 0 0 6px 0 var(--glow-color-40),
+    inset 0 0 15px 0 var(--glow-color-30),
+    inset 0 0 25px 2px var(--glow-color-20),
+    inset 0 0 50px 2px var(--glow-color-10),
+    0 0 1px 0 var(--glow-color-60),
+    0 0 3px 0 var(--glow-color-50),
+    0 0 6px 0 var(--glow-color-40),
+    0 0 15px 0 var(--glow-color-30),
+    0 0 25px 2px var(--glow-color-20),
+    0 0 50px 2px var(--glow-color-10);
+}
+
+/* Inner wrapper to keep card content above glow layers */
+.exp-card__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Icon container */
